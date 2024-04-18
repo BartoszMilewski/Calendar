@@ -1,11 +1,10 @@
 module Main where
 
 import Data.List
-import Data.List.Split (chunk)
+import Data.List.Split (chunksOf)
 
 import Data.Time
 import Data.Time.Calendar.WeekDate (toWeekDate)
-import System.Locale (defaultTimeLocale)
 
 month :: Day -> Int
 month d = let (_, m, _) = toGregorian d
@@ -82,7 +81,7 @@ formatCalendar year =
          intercalate "\n" $
          fmap (intercalate "\n") $
          transposeMonths $
-         chunk 3 $
+         chunksOf 3 $
          take 12 $
          titleMonths $
          formatMonths $
@@ -91,4 +90,4 @@ formatCalendar year =
          byWeekMonth [fromGregorian year 1 1..]
 
 main :: IO ()
-main = putStr $ formatCalendar 2015
+main = putStr $ formatCalendar 2024
